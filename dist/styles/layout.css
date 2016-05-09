@@ -35,6 +35,12 @@ ul.horizontal-slide li img {
     width: 150px;
 }
 
+ul.horizontal-slide li .item , .album-photos .item{
+	 padding: 15px 15px 50px;
+    background: white;
+    border-radius: 5px;
+}
+   
 .modal-content {
 	height: 90%;
     margin: 5%;
@@ -47,4 +53,15 @@ ul.horizontal-slide li img {
 
 .height50 {
 	height : 50%;
+}
+
+.album-photos .item{
+	    display: inline-block;
+    float: left;
+}
+
+.album-photos img {
+	width : 100px;
+	height : 100px;
+	
 }

@@ -97,12 +97,20 @@ System.register(['angular2/core', './../services/fb'], function(exports_1, conte
                     console.log("inside loadAlbumData");
                     this.albumData = response.data;
                     console.log(response);
-                    /*$('#modal-content').modal({
-                        show: true
-                    });*/
                 };
                 facebookSection.prototype.getAlbumPhotos = function (albumID) {
-                    var albumPhotosPromise = this.facebookService.getListofPhotos(albumID);
+                    var albumPhotosPromise = this._facebookService.getListofPhotos(albumID), _this = this;
+                    albumPhotosPromise.then(function (response) { return _this.loadAlbumPhotos(response); }, function (response) { return _this.errorWhileFetchingPhotos; });
+                };
+                facebookSection.prototype.loadAlbumPhotos = function (response) {
+                    $('#modal-content').modal({
+                        show: true
+                    });
+                    this.selectedAlbumPhotos = response.data;
+                    console.log(response);
+                };
+                facebookSection.prototype.errorWhileFetchingPhotos = function (response) {
+                    console.log("errorWhileFetchingPhotos");
                 };
                 facebookSection.prototype.errorWhileFetchingAlbums = function (response) {
                     console.log("errorWhileFetchingAlbums");

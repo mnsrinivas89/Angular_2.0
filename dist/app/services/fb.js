@@ -101,6 +101,24 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                         }
                     });
                 };
+                FacebookService.prototype.getListofPhotos = function (albumID) {
+                    /* make the API call */
+                    return new Promise(function (resolve, reject) {
+                        FB.api("/" + albumID + "/photos", {
+                            fields: ['height', 'width', 'picture']
+                        }, function (response) {
+                            if (response && !response.error) {
+                                /* handle the result */
+                                console.log("response is success " + response);
+                                resolve(response);
+                            }
+                            else {
+                                console.log("response is failure " + response);
+                                reject(response);
+                            }
+                        });
+                    });
+                };
                 FacebookService.prototype.getListofAlbums = function () {
                     /* make the API call */
                     return new Promise(function (resolve, reject) {

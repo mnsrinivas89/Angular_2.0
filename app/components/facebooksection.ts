@@ -87,13 +87,25 @@ export class facebookSection implements OnInit {
 		console.log("inside loadAlbumData");
 		this.albumData = response.data;
 		console.log(response);
-		/*$('#modal-content').modal({
-			show: true
-		});*/
+		
 	}
 
 	getAlbumPhotos (albumID) {
-		let albumPhotosPromise = this.facebookService.getListofPhotos(albumID);
+		let albumPhotosPromise = this._facebookService.getListofPhotos(albumID),
+			_this = this;
+		albumPhotosPromise.then(response => _this.loadAlbumPhotos(response), response => _this.errorWhileFetchingPhotos);
+	}
+	
+	loadAlbumPhotos (response) {
+		$('#modal-content').modal({
+			show: true
+		});
+		this.selectedAlbumPhotos = response.data;
+		console.log(response);
+	}
+	
+	errorWhileFetchingPhotos (response) {
+		console.log("errorWhileFetchingPhotos");
 	}
 	
 	errorWhileFetchingAlbums (response) {

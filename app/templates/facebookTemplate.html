@@ -8,7 +8,7 @@
             <div class="col-md-12">
               <ul class="horizontal-slide">
 				<template ngFor #album [ngForOf]="albumData" #firstValue="first">
-					<li class="col-md-2" *ngIf="album.count > 10" >
+					<li class="col-md-2" *ngIf="album.count > 10" (click)="getAlbumPhotos(album.id)">
 						<div class="item">
 						  <img src="{{album.picture.data.url}}" align="middle">
 						  <div class="carousel-caption">
@@ -30,9 +30,16 @@
                 <button type="button" class="close" data-dismiss="modal">×</button>
                 <h3>Modal header</h3>
             </div>
-            <div class="modal-body">
+            <div class="modal-body album-photos">
                 <p>
-                    <input type="text" id="txtname" />
+					<template ngFor #photo [ngForOf]="selectedAlbumPhotos">
+						<div class="item">
+							  <img src="{{photo.picture}}" align="middle">
+							  <div class="carousel-caption">
+								<!--<h3>{{album.name}}</h3>-->
+							  </div>
+						</div>
+					</template>
                 </p>
             </div>
             <div class="modal-footer"> 
